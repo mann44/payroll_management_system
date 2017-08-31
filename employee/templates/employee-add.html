@@ -1,0 +1,129 @@
+{% extends 'base.html' %} {% block content %}
+<script>
+	jQuery(function () {
+		jQuery("#user_dob").datepicker({
+			changeMonth: true,
+			changeYear: true,
+			yearRange: "0:+1",
+			dateFormat: 'd MM,yy'
+		});
+	});
+</script>
+<!--breadcrumbs start-->
+<div class="breadcrumbs">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-4 col-sm-4">
+				<h1>{{heading}}</h1>
+			</div>
+		</div>
+	</div>
+</div>
+<!--breadcrumbs end-->
+
+<!--container start-->
+<div class="registration-bg">
+	<div class="row">
+		<form enctype="multipart/form-data" method="post" class="form-signin wow fadeInUp" action="" style="max-width:60%">
+			{% csrf_token %}
+			<h2 class="form-signin-heading">
+				{% if fn == "add" %}
+					Add {{sub_heading}}
+				{% elif fn == "update" %}
+					{{sub_heading}}
+				{% else %}
+					My Profile
+				{% endif %}
+			</h2>
+			{% if messages %}
+				<div class="alert alert-success fade in" style="margin:10px;">
+					{% for message in messages %}
+						<strong>{{ message }}</strong>
+					{% endfor %}
+				</div>
+			{% endif %}
+			<div class="login-wrap">
+				<div class="clearfix"></div>
+				<div class="col-xs-6 form-group">
+					<label for="pwd">First Name</label>
+					<input type="text" class="form-control" placeholder="First Name" autofocus="" name="employee_first_name" id="employee_first_name" value="{{userdetails.employee_first_name}}">
+				</div>
+				<div class="col-xs-6 form-group">
+					<label for="pwd">Middle Name</label>
+					<input type="text" class="form-control" placeholder="Middle Name" autofocus="" name="employee_middle_name" id="employee_middle_name" value="{{userdetails.employee_middle_name}}">
+				</div>
+				<div class="col-xs-6 form-group">
+					<label for="pwd">Last Name</label>
+					<input type="text" class="form-control" placeholder="Last Name" autofocus="" name="employee_last_name" id="employee_last_name" value="{{userdetails.employee_last_name}}">
+				</div>
+				<div class="col-xs-6 form-group">
+					<label for="pwd">Login ID</label>
+					<input type="text" class="form-control" placeholder="Username" autofocus="" name="employee_user" id="employee_user" value="{{userdetails.employee_user}}">
+				</div>
+				<div class="col-xs-6 form-group update-user">
+					<label for="pwd">Password</label>
+					<input type="password" class="form-control" placeholder="Password" autofocus="" name="employee_password" id="user_password" value="{{userdetails.employee_password}}">
+				</div>
+				<div class="col-xs-6 form-group update-user">
+					<label for="pwd">Confirm Password</label>
+					<input type="password" class="form-control" placeholder="Confirm Password" autofocus="" name="user_confirm_password" id="user_confirm_password" value="{{userdetails.employee_password}}">
+				</div>
+				
+				<div class="col-xs-6 form-group">
+					<label for="pwd">Email Address</label>
+					<input type="text" class="form-control" placeholder="User Email" autofocus="" name="employee_email" id="employee_email" value="{{userdetails.employee_email}}">
+				</div>
+				<div class="col-xs-6 form-group update-user">
+					<label for="pwd">Mobile</label>
+					<input type="password" class="form-control" placeholder="Mobile" autofocus="" name="employee_mobile" id="employee_mobile" value="{{userdetails.employee_mobile}}">
+				</div>
+				
+				
+				<div class="col-xs-6 form-group">
+					<label>Gender {{userdetails.user_gender}}</label>
+					<span class="form-control">
+						<input type="radio" class="radio-inline" name="employee_gender" value="Male" {% ifequal userdetails.employee_gender 'Male' %} checked="checked"{% endifequal %} required> Male &nbsp&nbsp
+						<input type="radio" class="radio-inline" name="employee_gender" value="Female" {% ifequal userdetails.employee_gender 'Female' %} checked="checked"{% endifequal %} required> Female
+					</span>
+				</div>
+				<div class="col-xs-6 form-group">
+					<label for="pwd">Date of Birth</label>
+					<input type="text" class="form-control" placeholder="Date of Birth" autofocus="" id="employee_dob" name="user_dob" value="{{userdetails.employee_dob}}">
+				</div>
+				<div class="col-xs-6 form-group">
+					<label for="pwd">Department</label>
+					<input type="text" class="form-control" placeholder="Department" autofocus="" name="employee_deparment" id="employee_deparment" value="{{userdetails.employee_deparment}}">
+				</div>
+				<div class="col-xs-6 form-group">
+					<label for="pwd">Nationality</label>
+					<input type="text" class="form-control" placeholder="Nationality" autofocus="" id="employee_nationalty" name="employee_nationalty" value="{{userdetails.employee_nationalty}}">
+				</div>
+				<div class="col-xs-6 form-group">
+					<label for="pwd">Village</label>
+					<input type="text" class="form-control" placeholder="Village" autofocus="" name="employee_village" id="employee_village" value="{{userdetails.employee_village}}">
+				</div>
+				<div class="col-xs-6 form-group">
+					<label for="pwd">Address</label>
+					<input type="text" class="form-control" placeholder="Address" autofocus="" name="employee_address" id="employee_address" value="{{userdetails.employee_address}}">
+				</div>
+				
+				<button class="btn btn-lg btn-login btn-block" type="submit">Submit</button>
+			</div>
+			<input type="hidden" name="act" value="save_user">
+			<input type="hidden" name="avail_image" value="{{userdetails.user_image}}">
+			<input type="hidden" name="user_id" value="{{userdetails.user_id}}">
+		</form>
+	</div>
+</div>
+{% if userdetails %}
+<script>
+	$(".update-user").hide();
+</script>
+{% endif %}
+{% if request.session.user_level_id != 1 %}
+<script>
+	$(".role-options").hide();
+</script>
+{% endif %}
+<!--container end-->
+{% endblock content %}

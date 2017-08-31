@@ -5,9 +5,9 @@ $(document).on("click", ".delete-dialog", function () {
   var id = $(this).data('id');
 	$("#recordID").val( id );
 });
-function delete_record(user_id)
+function delete_record(employee_id)
 {
-	location.href = "/users/delete/"+$("#recordID").val();
+	location.href = "/employee/delete/"+$("#recordID").val();
 }
 </script>
 
@@ -59,11 +59,8 @@ function delete_record(user_id)
 						<td>{{employee.employee_dob}}</td>
 						<td>
 						  <div class="btn-group">
-						     <a href="/users/update/{{user.user_id}}" class="btn btn-success">Edit</a>
-								 {% if user.user_level_id == 3 %}
-								 	<a href="/appointments/report/{{user.user_id}}" class="btn btn-primary" style="height:34px">Appointments</a>
-								 {% endif %}
-                 <a class="delete-dialog btn btn-danger" data-id="{{user.user_id}}" data-toggle="modal" href="#myModal-2">Delete</a>
+						    <a href="#" class="btn btn-success">Edit</a>
+                 <a class="delete-dialog btn btn-danger" data-id="{{employee.employee_id}}" data-toggle="modal" href="#myModal-2">Delete</a>
 						  </div>
 						  </td>
 					  </tr>
