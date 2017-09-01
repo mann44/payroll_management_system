@@ -1,0 +1,140 @@
+{% extends 'base.html' %} {% block content %}
+<script>
+	jQuery(function () {
+		jQuery("#timesheet_date").datepicker({
+			changeMonth: true,
+			changeYear: true,
+			yearRange: "0:+1",
+			dateFormat: 'd MM,yy'
+		});
+	});
+</script>
+<!--breadcrumbs start-->
+<div class="breadcrumbs">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-4 col-sm-4">
+				<h1>{{heading}}</h1>
+			</div>
+		</div>
+	</div>
+</div>
+<!--breadcrumbs end-->
+
+<!--container start-->
+<div class="registration-bg">
+	<div class="row">
+		<form enctype="multipart/form-data" method="post" class="form-signin wow fadeInUp" action="" style="max-width:60%">
+			{% csrf_token %}
+			<h2 class="form-signin-heading">
+				{% if fn == "add" %}
+					Add Salary
+				{% elif fn == "update" %}
+					Update Salary
+				{% endif %}
+			</h2>
+			{% if messages %}
+				<div class="alert alert-success fade in" style="margin:10px;">
+					{% for message in messages %}
+						<strong>{{ message }}</strong>
+					{% endfor %}
+				</div>
+			{% endif %}
+			<div class="login-wrap">
+			
+			
+				
+				<div class="col-xs-6 form-group">
+					<label for="pwd">Employee Name</label>
+					<select name="salary_employee_id" required class="form-control" placeholder="Employee Name" autofocus="" />
+					<option value="">Please Select</option>
+					{% for employeename in employeetypelist %}
+						<option value="{{ employeename.employee_id }}" {% ifequal employeename.employee_id|stringformat:"s" salaryDetails.salary_employee_id %} selected="selected"{% endifequal %}>{{employeename.employee_first_name}}</option>
+					{% endfor %}
+					</select>
+				</div>
+
+
+				<div class="col-xs-6 form-group">
+					<label for="pwd">Month Salary</label>
+					<input type="text" value="{{salaryDetails.salary_month}}" name="salary_month" id="timesheet_work_title" class="form-control" placeholder="Month Salary">
+				</div>
+				<div class="col-xs-6 form-group">
+					<label for="pwd">Working Days</label>
+					<input type="text" value="{{salaryDetails.salary_working_days}}" name="salary_working_days" id="salary_working_days" class="form-control" placeholder="Working Days">
+				</div>
+				<div class="col-xs-6 form-group">
+					<label for="pwd">Basic Salary</label>
+					<input type="text" value="{{salaryDetails.salary_basic}}" name="salary_basic" id="salary_basic" class="form-control" placeholder="Basic Salary">
+				</div>
+				<div class="col-xs-6 form-group">
+					<label for="pwd">HRA Salary</label>
+					<input type="text" value="{{salaryDetails.salary_hra}}" name="salary_hra" id="salary_hra" class="form-control" placeholder="HRA Salary">
+				</div>
+				<div class="col-xs-6 form-group">
+					<label for="pwd">Mediclaim Salary</label>
+					<input type="text" value="{{salaryDetails.salary_mediclaim}}" name="salary_mediclaim" id="salary_mediclaim" class="form-control" placeholder="Mediclaim Salary">
+				</div>
+
+				
+				
+				<div class="col-xs-6 form-group">
+					<label for="pwd">TA Salary</label>
+					<input type="text" value="{{salaryDetails.salary_ta}}" name="salary_ta" id="salary_ta" class="form-control" placeholder="TA Salary">
+				</div>
+				<div class="col-xs-6 form-group">
+					<label for="pwd">DA Salary</label>
+					<input type="text" value="{{salaryDetails.salary_da}}" name="salary_da" id="salary_da" class="form-control" placeholder="DA Salary">
+				</div>
+				<div class="col-xs-6 form-group">
+					<label for="pwd">Reimbursement Salary</label>
+					<input type="text" value="{{salaryDetails.salary_reimbursement}}" name="salary_reimbursement" id="salary_reimbursement" class="form-control" placeholder="Reimbursement Salary">
+				</div>
+				<div class="col-xs-6 form-group">
+					<label for="pwd">CA Salary</label>
+					<input type="text" value="{{salaryDetails.salary_ca}}" name="salary_ca" id="salary_ca" class="form-control" placeholder="CA Salary">
+				</div>
+				<div class="col-xs-6 form-group">
+					<label for="pwd">Others Salary</label>
+					<input type="text" value="{{salaryDetails.salary_others}}" name="salary_others" id="salary_others" class="form-control" placeholder="Others Salary">
+				</div>
+				<div class="col-xs-6 form-group">
+					<label for="pwd">DPF Salary</label>
+					<input type="text" value="{{salaryDetails.salary_dpf}}" name="salary_dpf" id="salary_dpf" class="form-control" placeholder="DPF Salary">
+				</div>
+				<div class="col-xs-6 form-group">
+					<label for="pwd">DTAX Salary</label>
+					<input type="text" value="{{salaryDetails.salary_dtax}}" name="salary_dtax" id="salary_dtax" class="form-control" placeholder="DTAX Salary">
+				</div>
+				<div class="col-xs-6 form-group">
+					<label for="pwd">Deduction Salary</label>
+					<input type="text" value="{{salaryDetails.salary_dedc}}" name="salary_dedc" id="salary_dedc" class="form-control" placeholder="Deduction Salary">
+				</div>
+				<div class="col-xs-6 form-group">
+					<label for="pwd">Total Salary</label>
+					<input type="text" value="{{salaryDetails.salary_total}}" name="salary_total" id="salary_total" class="form-control" placeholder="Total Salary">
+				</div>
+				<div class="col-xs-6 form-group">
+					<label for="pwd">Year Salary</label>
+					<input type="text" value="{{salaryDetails.salary_year}}" name="salary_year" id="salary_year" class="form-control" placeholder="Year Salary">
+				</div>
+				
+				<button class="btn btn-lg btn-login btn-block" type="submit">Submit</button>
+			</div>
+			<input type="hidden" name="act" value="save_salary">
+			<input type="hidden" name="salary_id" value="{{salarylist.salary_id}}">
+		</form>
+	</div>
+</div>
+{% if appointmentdetails %}
+<script>
+	$(".update-appointment").hide();
+</script>
+{% endif %}
+{% if request.session.appointment_level_id != 1 %}
+<script>
+	$(".role-options").hide();
+</script>
+{% endif %}
+<!--container end-->
+{% endblock content %}

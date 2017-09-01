@@ -21,5 +21,10 @@ urlpatterns = [
     url(r'^$', include('pages.urls')),
     url(r'^pages/', include('pages.urls')),
     url(r'^employee/', include('employee.urls')),
+    url(r'^department/', include('department.urls')),
+    url(r'^project/', include('project.urls')),
+    url(r'^timesheet/', include('timesheet.urls')),
+    url(r'^leave/', include('leave.urls')),
+    url(r'^salary/', include('salary.urls')),
     url(r'^admin/', admin.site.urls),
 ]

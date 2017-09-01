@@ -22,12 +22,6 @@ def listing(request):
     context['heading'] = "All Employee Record";
     return render(request,'employee-record.html', context)
 
-def getData(id):
-    cursor = connection.cursor()
-    cursor.execute("SELECT * FROM medicine WHERE medicine_id = " + id)
-    dataList = dictfetchall(cursor)
-    return dataList[0];
-
 def getDropDown(table, condtion):
     cursor = connection.cursor()
     cursor.execute("SELECT * FROM " + table + " WHERE " + condtion)

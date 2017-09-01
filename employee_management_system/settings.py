@@ -32,6 +32,11 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'employee.apps.EmployeeConfig',
+    'department.apps.DepartmentConfig',
+    'project.apps.ProjectConfig',
+    'timesheet.apps.TimesheetConfig',
+    'leave.apps.LeaveConfig',
+    'salary.apps.SalaryConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

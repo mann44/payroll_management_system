@@ -1,0 +1,102 @@
+{% extends 'base.html' %} {% block content %}
+<script>
+	jQuery(function () {
+		jQuery("#timesheet_date").datepicker({
+			changeMonth: true,
+			changeYear: true,
+			yearRange: "0:+1",
+			dateFormat: 'd MM,yy'
+		});
+	});
+</script>
+<!--breadcrumbs start-->
+<div class="breadcrumbs">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-4 col-sm-4">
+				<h1>{{heading}}</h1>
+			</div>
+		</div>
+	</div>
+</div>
+<!--breadcrumbs end-->
+
+<!--container start-->
+<div class="registration-bg">
+	<div class="row">
+		<form enctype="multipart/form-data" method="post" class="form-signin wow fadeInUp" action="" style="max-width:60%">
+			{% csrf_token %}
+			<h2 class="form-signin-heading">
+				{% if fn == "add" %}
+					Add New Leave
+				{% elif fn == "update" %}
+					Update Leave
+				{% endif %}
+			</h2>
+			{% if messages %}
+				<div class="alert alert-success fade in" style="margin:10px;">
+					{% for message in messages %}
+						<strong>{{ message }}</strong>
+					{% endfor %}
+				</div>
+			{% endif %}
+			<div class="login-wrap">
+			
+			
+				
+				<div class="col-xs-6 form-group">
+					<label for="pwd">Employee Name</label>
+					<select name="leave_employee_id" required class="form-control" placeholder="Employee Name" autofocus="" />
+					<option value="">Please Select</option>
+					{% for employeename in employeetypelist %}
+						<option value="{{ employeename.employee_id }}" {% ifequal employeename.employee_id|stringformat:"s" timesheetDetails.leave_employee_id %} selected="selected"{% endifequal %}>{{employeename.employee_first_name}}</option>
+					{% endfor %}
+					</select>
+				</div>
+
+				<div class="col-xs-6 form-group">
+					<label for="pwd">Leave Reason</label>
+					<input type="text" value="{{timesheetDetails.leave_reason}}" name="leave_reason" id="leave_reason" class="form-control" placeholder="Leave Reason">
+				</div>
+				<div class="col-xs-6 form-group">
+					<label for="pwd">Leave From Date</label>
+					<input type="text" value="{{timesheetDetails.leave_from_date}}" name="leave_from_date" id="leave_from_date" class="form-control" placeholder="Leave From Date">
+				</div>
+				<div class="col-xs-6 form-group">
+					<label for="pwd">Leave To Date</label>
+					<input type="text" value="{{timesheetDetails.leave_to_date}}" name="leave_to_date" id="leave_to_date" class="form-control" placeholder="Leave To Date">
+				</div>
+
+				<div class="col-xs-6 form-group">
+					<label for="pwd">Leave Status</label>
+					<select name="leave_status" required class="form-control" placeholder="Leave Status" autofocus="" />
+					<option value="">Please Select</option>
+					{% for leavests in statusList %}
+						<option value="{{ leavests.status_id }}" {% ifequal leavests.status_id|stringformat:"s" timesheetDetails.leave_status %} selected="selected"{% endifequal %}>{{leavests.status_name}}</option>
+					{% endfor %}
+					</select>
+				</div>
+				
+				<div class="col-xs-6 form-group" style="clear:both">
+					<label for="pwd">Prescriptions of the Leave</label>
+					<textarea class="form-control" style="height:150px;" placeholder="Description" autofocus="" name="leave_description" id="leave_description" required>{{timesheetDetails.leave_description}}</textarea>
+				</div>
+				<button class="btn btn-lg btn-login btn-block" type="submit">Submit</button>
+			</div>
+			<input type="hidden" name="act" value="save_leave">
+			<input type="hidden" name="leave_id" value="{{leavests.leave_id}}">
+		</form>
+	</div>
+</div>
+{% if appointmentdetails %}
+<script>
+	$(".update-appointment").hide();
+</script>
+{% endif %}
+{% if request.session.appointment_level_id != 1 %}
+<script>
+	$(".role-options").hide();
+</script>
+{% endif %}
+<!--container end-->
+{% endblock content %}

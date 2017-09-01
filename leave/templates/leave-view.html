@@ -5,9 +5,9 @@ $(document).on("click", ".delete-dialog", function () {
   var id = $(this).data('id');
 	$("#recordID").val( id );
 });
-function delete_record(employee_id)
+function delete_record(dept_id)
 {
-	location.href = "/employee/delete/"+$("#recordID").val();
+	location.href = "/leave/delete/"+$("#recordID").val();
 }
 </script>
 
@@ -35,30 +35,33 @@ function delete_record(employee_id)
 				</div>
 		  {% endif %}
 		  <div class="col-lg-12">
-			<form name="frm" action="lib/user.php" method="post">
+			<form name="frm" action="" method="post">
 			  <section class="panel">
-				 
 				  <table class="table table-striped table-advance table-hover" style="color:#000000">
 				   <tbody>
 					  <tr class="bg-primary">
 						<th style="background-color:#34495e; color:#FFFFFF;">Sr. No.</th>
-						<th style="background-color:#34495e; color:#FFFFFF;">Name</th>
-						<th style="background-color:#34495e; color:#FFFFFF;">Mobile</th>
-						<th style="background-color:#34495e; color:#FFFFFF;">Email</th>
-						<th style="background-color:#34495e; color:#FFFFFF;">Date Of Birth</th>
+						<th style="background-color:#34495e; color:#FFFFFF;">Employee Name</th>
+						<th style="background-color:#34495e; color:#FFFFFF;">Leave Reason</th>
+						<th style="background-color:#34495e; color:#FFFFFF;">Leave Form Date</th>
+						<th style="background-color:#34495e; color:#FFFFFF;">Leave To Date</th>
+						<th style="background-color:#34495e; color:#FFFFFF;">Leave Description</th>
+						<th style="background-color:#34495e; color:#FFFFFF;">Leave Status</th>
 						<th style="background-color:#34495e; color:#FFFFFF;"><i class="icon_cogs"></i> Action</th>
 					  </tr>
-					  {% for employee in employeelist %}
+					  {% for empleave in leavelist %}
 					  <tr>
 						<td style="text-align:center; font-weight:bold;">{{ forloop.counter }}</td>
-						<td>{{employee.employee_user}}</td>
-						<td>{{employee.employee_email}}</td>
-						<td>{{employee.employee_gender}}</td>
-						<td>{{employee.employee_dob}}</td>
+						<td>{{empleave.employee_first_name}}</td>
+						<td>{{empleave.leave_reason}}</td>
+						<td>{{empleave.leave_from_date}}</td>
+						<td>{{empleave.leave_to_date}}</td>
+						<td>{{empleave.leave_description}}</td>
+						<td>{{empleave.status_name}}</td>
 						<td>
 						  <div class="btn-group">
-						    <a href="#" class="btn btn-success">Edit</a>
-                 <a class="delete-dialog btn btn-danger" data-id="{{employee.employee_id}}" data-toggle="modal" href="#myModal-2">Delete</a>
+						     <a href="/leave/update/{{empleave.leave_id}}" class="btn btn-success">Edit</a>
+							  <a class="delete-dialog btn btn-danger" data-id="{{empleave.leave_id}}" data-toggle="modal" href="#myModal-2">Delete</a>
 						  </div>
 						  </td>
 					  </tr>
@@ -67,7 +70,7 @@ function delete_record(employee_id)
 				</table>
 			  </section>
 			  <input type="hidden" name="act" />
-			  <input type="hidden" name="user_id" id="recordID" />
+			  <input type="hidden" name="project_id" id="recordID" />
 			 </form>
 		  </div>
 	  </div>

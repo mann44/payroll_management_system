@@ -1,0 +1,102 @@
+{% extends 'base.html' %} {% block content %}
+<script>
+	jQuery(function () {
+		jQuery("#timesheet_date").datepicker({
+			changeMonth: true,
+			changeYear: true,
+			yearRange: "0:+1",
+			dateFormat: 'd MM,yy'
+		});
+	});
+</script>
+<!--breadcrumbs start-->
+<div class="breadcrumbs">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-4 col-sm-4">
+				<h1>{{heading}}</h1>
+			</div>
+		</div>
+	</div>
+</div>
+<!--breadcrumbs end-->
+
+<!--container start-->
+<div class="registration-bg">
+	<div class="row">
+		<form enctype="multipart/form-data" method="post" class="form-signin wow fadeInUp" action="" style="max-width:60%">
+			{% csrf_token %}
+			<h2 class="form-signin-heading">
+				{% if fn == "add" %}
+					Add New Time Sheet
+				{% elif fn == "update" %}
+					Update Time Sheet
+				{% endif %}
+			</h2>
+			{% if messages %}
+				<div class="alert alert-success fade in" style="margin:10px;">
+					{% for message in messages %}
+						<strong>{{ message }}</strong>
+					{% endfor %}
+				</div>
+			{% endif %}
+			<div class="login-wrap">
+			
+			
+				
+				<div class="col-xs-6 form-group">
+					<label for="pwd">Employee Name</label>
+					<select name="timesheet_employee_id" required class="form-control" placeholder="Employee Name" autofocus="" />
+					<option value="">Please Select</option>
+					{% for employeename in employeetypelist %}
+						<option value="{{ employeename.employee_id }}" {% ifequal employeename.employee_id|stringformat:"s" timesheetDetails.timesheet_employee_id %} selected="selected"{% endifequal %}>{{employeename.employee_first_name}}</option>
+					{% endfor %}
+					</select>
+				</div>
+
+
+				<div class="col-xs-6 form-group">
+					<label for="pwd">Project Name</label>
+					<select name="timesheet_project_id" required class="form-control" placeholder="Project Name" autofocus="" />
+					<option value="">Please Select</option>
+					{% for projectname in projectnamelist %}
+						<option value="{{ projectname.project_id }}" {% ifequal projectname.project_id|stringformat:"s" timesheetDetails.timesheet_project_id %} selected="selected"{% endifequal %}>{{projectname.project_title}}</option>
+					{% endfor %}
+					</select>
+				</div>
+				<div class="col-xs-6 form-group">
+					<label for="pwd">Timesheet Work Title</label>
+					<input type="text" value="{{timesheetDetails.timesheet_work_title}}" name="timesheet_work_title" id="timesheet_work_title" class="form-control" placeholder="Timesheet Work Title">
+				</div>
+				<div class="col-xs-6 form-group">
+					<label for="pwd">Timesheet Hours</label>
+					<input type="text" value="{{timesheetDetails.timesheet_hours}}" name="timesheet_hours" id="timesheet_hours" class="form-control" placeholder="Time Sheet Hours">
+				</div>
+				<div class="col-xs-6 form-group">
+					<label for="pwd">Timesheet Date</label>
+					<input type="text" value="{{timesheetDetails.timesheet_date}}" name="timesheet_date" id="timesheet_date" class="form-control" placeholder="Timesheet Date">
+				</div>
+
+				<div class="col-xs-6 form-group" style="clear:both">
+					<label for="pwd">Prescriptions of the Timesheet</label>
+					<textarea class="form-control" style="height:150px;" placeholder="Description" autofocus="" name="timesheet_description" id="timesheet_description" required>{{timesheetDetails.timesheet_description}}</textarea>
+				</div>
+				<button class="btn btn-lg btn-login btn-block" type="submit">Submit</button>
+			</div>
+			<input type="hidden" name="act" value="save_timesheet">
+			<input type="hidden" name="timesheet_id" value="{{timesheetlist.timesheet_id}}">
+		</form>
+	</div>
+</div>
+{% if appointmentdetails %}
+<script>
+	$(".update-appointment").hide();
+</script>
+{% endif %}
+{% if request.session.appointment_level_id != 1 %}
+<script>
+	$(".role-options").hide();
+</script>
+{% endif %}
+<!--container end-->
+{% endblock content %}
