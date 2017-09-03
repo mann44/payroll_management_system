@@ -56,7 +56,7 @@ def update(request, leaveId):
     if (request.method == "POST"):
         cursor = connection.cursor()
         cursor.execute("""
-                   UPDATE leave
+                   UPDATE `leave`
                    SET leave_employee_id=%s, leave_reason=%s, leave_description=%s, leave_from_date=%s, leave_to_date=%s, leave_status=%s WHERE leave_id = %s
                 """, (
             request.POST['leave_employee_id'],

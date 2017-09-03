@@ -26,5 +26,6 @@ urlpatterns = [
     url(r'^timesheet/', include('timesheet.urls')),
     url(r'^leave/', include('leave.urls')),
     url(r'^salary/', include('salary.urls')),
+    url(r'^appraisal/', include('appraisal.urls')),
     url(r'^admin/', admin.site.urls),
 ]

@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% block content %}
 <script>
 	jQuery(function () {
-		jQuery("#user_dob").datepicker({
+		jQuery("#employee_dob").datepicker({
 			changeMonth: true,
 			changeYear: true,
 			yearRange: "0:+1",
@@ -75,7 +75,7 @@
 				</div>
 				<div class="col-xs-6 form-group update-user">
 					<label for="pwd">Mobile</label>
-					<input type="password" class="form-control" placeholder="Mobile" autofocus="" name="employee_mobile" id="employee_mobile" value="{{userdetails.employee_mobile}}">
+					<input type="text" class="form-control" placeholder="Mobile" autofocus="" name="employee_mobile" id="employee_mobile" value="{{userdetails.employee_mobile}}">
 				</div>
 				
 				
@@ -88,7 +88,7 @@
 				</div>
 				<div class="col-xs-6 form-group">
 					<label for="pwd">Date of Birth</label>
-					<input type="text" class="form-control" placeholder="Date of Birth" autofocus="" id="employee_dob" name="user_dob" value="{{userdetails.employee_dob}}">
+					<input type="text" class="form-control" placeholder="Date of Birth" autofocus="" id="employee_dob" name="employee_dob" value="{{userdetails.employee_dob}}">
 				</div>
 				<div class="col-xs-6 form-group">
 					<label for="pwd">Department</label>

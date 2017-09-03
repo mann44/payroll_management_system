@@ -1,0 +1,108 @@
+{% extends 'base.html' %} {% block content %}
+<script>
+	jQuery(function () {
+		jQuery("#timesheet_date").datepicker({
+			changeMonth: true,
+			changeYear: true,
+			yearRange: "0:+1",
+			dateFormat: 'd MM,yy'
+		});
+	});
+</script>
+<!--breadcrumbs start-->
+<div class="breadcrumbs">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-4 col-sm-4">
+				<h1>{{heading}}</h1>
+			</div>
+		</div>
+	</div>
+</div>
+<!--breadcrumbs end-->
+
+<!--container start-->
+<div class="registration-bg">
+	<div class="row">
+		<form enctype="multipart/form-data" method="post" class="form-signin wow fadeInUp" action="" style="max-width:60%">
+			{% csrf_token %}
+			<h2 class="form-signin-heading">
+				{% if fn == "add" %}
+					Add New Appraisal
+				{% elif fn == "update" %}
+					Update Appraisal
+				{% endif %}
+			</h2>
+			{% if messages %}
+				<div class="alert alert-success fade in" style="margin:10px;">
+					{% for message in messages %}
+						<strong>{{ message }}</strong>
+					{% endfor %}
+				</div>
+			{% endif %}
+			<div class="login-wrap">
+			
+			
+				
+				<div class="col-xs-6 form-group">
+					<label for="pwd">Employee Name</label>
+					<select name="appr_emp_id" required class="form-control" placeholder="Employee Name" autofocus="" />
+					<option value="">Please Select</option>
+					{% for appraisalname in employeetypelist %}
+						<option value="{{ appraisalname.employee_id }}" {% ifequal appraisalname.employee_id|stringformat:"s" apprDetails.appr_emp_id %} selected="selected"{% endifequal %}>{{appraisalname.employee_first_name}}</option>
+					{% endfor %}
+					</select>
+				</div>
+				<div class="col-xs-6 form-group">
+					<label for="pwd">Manager Name</label>
+					<input type="text" value="{{apprDetails.appr_manager_name}}" name="appr_manager_name" id="appr_manager_name" class="form-control" placeholder="Manager Name">
+				</div>
+				<div class="col-xs-6 form-group">
+					<label for="pwd">Communication Point</label>
+					<input type="text" value="{{apprDetails.appr_comm_point}}" name="appr_comm_point" id="appr_comm_point" class="form-control" placeholder="Communication Point">
+				</div>
+				<div class="col-xs-6 form-group">
+					<label for="pwd">Team Point</label>
+					<input type="text" value="{{apprDetails.appr_team_point}}" name="appr_team_point" id="appr_team_point" class="form-control" placeholder="Team Point">
+				</div>
+				<div class="col-xs-6 form-group">
+					<label for="pwd">Program Point</label>
+					<input type="text" value="{{apprDetails.appr_prog_point}}" name="appr_prog_point" id="appr_prog_point" class="form-control" placeholder="Program Point">
+				</div>
+				<div class="col-xs-6 form-group">
+					<label for="pwd">Team Point</label>
+					<input type="text" value="{{apprDetails.appr_team_point}}" name="appr_team_point" id="appr_team_point" class="form-control" placeholder="Team Point">
+				</div>
+				<div class="col-xs-6 form-group">
+					<label for="pwd">Write Point</label>
+					<input type="text" value="{{apprDetails.appr_write_point}}" name="appr_write_point" id="appr_write_point" class="form-control" placeholder="Write Point">
+				</div>
+				<div class="col-xs-6 form-group">
+					<label for="pwd">Client Point</label>
+					<input type="text" value="{{apprDetails.appr_client_point}}" name="appr_client_point" id="appr_client_point" class="form-control" placeholder="Client Point">
+				</div>
+				<div class="col-xs-6 form-group">
+					<label for="pwd">Database Point</label>
+					<input type="text" value="{{apprDetails.appr_database_point}}" name="appr_database_point" id="appr_database_point" class="form-control" placeholder="Client Point">
+				</div>
+
+				
+				<button class="btn btn-lg btn-login btn-block" type="submit">Submit</button>
+			</div>
+			<input type="hidden" name="act" value="save_appraisal">
+			<input type="hidden" name="appr_id" value="{{timesheetlist.appr_id}}">
+		</form>
+	</div>
+</div>
+{% if appointmentdetails %}
+<script>
+	$(".update-appointment").hide();
+</script>
+{% endif %}
+{% if request.session.appointment_level_id != 1 %}
+<script>
+	$(".role-options").hide();
+</script>
+{% endif %}
+<!--container end-->
+{% endblock content %}

@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'project.apps.ProjectConfig',
     'timesheet.apps.TimesheetConfig',
     'leave.apps.LeaveConfig',
+    'appraisal.apps.AppraisalConfig',
     'salary.apps.SalaryConfig',
     'django.contrib.admin',
     'django.contrib.auth',
