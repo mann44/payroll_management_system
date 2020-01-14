@@ -11,8 +11,7 @@ from django.db import connection
 
 def listing(request):
     cursor = connection.cursor()
-    cursor.execute(
-        "SELECT * FROM department")
+    cursor.execute("SELECT * FROM department")
     departmentlist = dictfetchall(cursor)
 
     context = {
@@ -33,7 +32,7 @@ def dictfetchall(cursor):
 
 def getData(id):
     cursor = connection.cursor()
-    cursor.execute("SELECT * FROM department WHERE dept_id = " + id)
+    cursor.execute("SELECT * FROM department WHERE department_id = " + id)
     dataList = dictfetchall(cursor)
     return dataList[0];
 
@@ -47,15 +46,15 @@ def update(request, departmentId):
         cursor = connection.cursor()
         cursor.execute("""
                    UPDATE department
-                   SET dept_name=%s, dept_desc=%s WHERE dept_id = %s
+                   SET department_name=%s, department_desc=%s WHERE department_id = %s
                 """, (
-            request.POST['dept_name'],
-            request.POST['dept_desc'],
+            request.POST['department_name'],
+            request.POST['department_desc'],
             departmentId
         ))
         context["departmentDetails"] =  getData(departmentId)
         messages.add_message(request, messages.INFO, "Department updated succesfully !!!")
-        return redirect('listing')
+        return redirect('department-listing')
     else:
         return render(request, 'department.html', context)
 
@@ -69,15 +68,16 @@ def add(request):
         cursor = connection.cursor()
         cursor.execute("""
 		   INSERT INTO department
-		   SET dept_name=%s, dept_desc=%s
+		   SET department_name=%s, department_desc=%s
 		""", (
-            request.POST['dept_name'],
-            request.POST['dept_desc']))
-        return redirect('listing')
+            request.POST['department_name'],
+            request.POST['department_desc']))
+        return redirect('department-listing')
     return render(request, 'department.html', context)
 
 def delete(request, id):
     cursor = connection.cursor()
-    sql = 'DELETE FROM department WHERE dept_id=' + id
+    sql = 'DELETE FROM department WHERE department_id=' + id
     cursor.execute(sql)
-    return redirect('listing')
+    messages.add_message(request, messages.INFO, "Department Deleted succesfully !!!")
+    return redirect('department-listing')

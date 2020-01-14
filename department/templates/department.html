@@ -46,18 +46,18 @@
 				
 				<div class="col-xs-6 form-group">
 					<label for="pwd">Department Name</label>
-					<input type="text" value="{{departmentDetails.dept_name}}" name="dept_name" id="dept_name" class="form-control" placeholder="Department Name" required>
+					<input type="text" value="{{departmentDetails.department_name}}" name="department_name" id="department_name" class="form-control" placeholder="Department Name" required>
 				</div>
 
 
 				<div class="col-xs-6 form-group" style="clear:both">
 					<label for="pwd">Prescriptions of the Department</label>
-					<textarea class="form-control" style="height:150px;" placeholder="Description" autofocus="" name="dept_desc" id="dept_desc" required>{{departmentDetails.dept_desc}}</textarea>
+					<textarea class="form-control" style="height:150px;" placeholder="Description" autofocus="" name="department_desc" id="department_desc" required>{{departmentDetails.department_desc}}</textarea>
 				</div>
 				<button class="btn btn-lg btn-login btn-block" type="submit">Submit</button>
 			</div>
 			<input type="hidden" name="act" value="save_department">
-			<input type="hidden" name="user_id" value="{{departmentlist.dept_id}}">
+			<input type="hidden" name="user_id" value="{{departmentlist.department_id}}">
 		</form>
 	</div>
 </div>

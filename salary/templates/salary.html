@@ -46,21 +46,21 @@
 				
 				<div class="col-xs-6 form-group">
 					<label for="pwd">Employee Name</label>
-					<select name="salary_employee_id" required class="form-control" placeholder="Employee Name" autofocus="" />
+					<select name="salary_user_id" required class="form-control" placeholder="Employee Name" autofocus="" />
 					<option value="">Please Select</option>
 					{% for employeename in employeetypelist %}
-						<option value="{{ employeename.employee_id }}" {% ifequal employeename.employee_id|stringformat:"s" salaryDetails.salary_employee_id %} selected="selected"{% endifequal %}>{{employeename.employee_first_name}}</option>
+						<option value="{{ employeename.user_id }}" {% ifequal employeename.user_id|stringformat:"s" salaryDetails.salary_user_id %} selected="selected"{% endifequal %}>{{employeename.user_name}}</option>
 					{% endfor %}
 					</select>
 				</div>
 
 
 				<div class="col-xs-6 form-group">
-					<label for="pwd">Month Salary</label>
+					<label for="pwd">Month Pay</label>
 					<input type="text" value="{{salaryDetails.salary_month}}" name="salary_month" id="timesheet_work_title" class="form-control" placeholder="Month Salary">
 				</div>
 				<div class="col-xs-6 form-group">
-					<label for="pwd">Working Days</label>
+					<label for="pwd">Total Working Days</label>
 					<input type="text" value="{{salaryDetails.salary_working_days}}" name="salary_working_days" id="salary_working_days" class="form-control" placeholder="Working Days">
 				</div>
 				<div class="col-xs-6 form-group">
@@ -68,57 +68,57 @@
 					<input type="text" value="{{salaryDetails.salary_basic}}" name="salary_basic" id="salary_basic" class="form-control" placeholder="Basic Salary">
 				</div>
 				<div class="col-xs-6 form-group">
-					<label for="pwd">HRA Salary</label>
-					<input type="text" value="{{salaryDetails.salary_hra}}" name="salary_hra" id="salary_hra" class="form-control" placeholder="HRA Salary">
+					<label for="pwd">House Rent Allowance</label>
+					<input type="text" value="{{salaryDetails.salary_hra}}" name="salary_hra" id="salary_hra" class="form-control" placeholder="House Rent Allowance Salary">
 				</div>
 				<div class="col-xs-6 form-group">
-					<label for="pwd">Mediclaim Salary</label>
+					<label for="pwd">Mediclaim</label>
 					<input type="text" value="{{salaryDetails.salary_mediclaim}}" name="salary_mediclaim" id="salary_mediclaim" class="form-control" placeholder="Mediclaim Salary">
 				</div>
-
-				
-				
 				<div class="col-xs-6 form-group">
-					<label for="pwd">TA Salary</label>
-					<input type="text" value="{{salaryDetails.salary_ta}}" name="salary_ta" id="salary_ta" class="form-control" placeholder="TA Salary">
+					<label for="pwd">Travel Allowance</label>
+					<input type="text" value="{{salaryDetails.salary_ta}}" name="salary_ta" id="salary_ta" class="form-control" placeholder="Travel Allowance Salary">
 				</div>
 				<div class="col-xs-6 form-group">
-					<label for="pwd">DA Salary</label>
-					<input type="text" value="{{salaryDetails.salary_da}}" name="salary_da" id="salary_da" class="form-control" placeholder="DA Salary">
+					<label for="pwd">Dearness Allowance</label>
+					<input type="text" value="{{salaryDetails.salary_da}}" name="salary_da" id="salary_da" class="form-control" placeholder="Dearness Allowance Salary">
 				</div>
 				<div class="col-xs-6 form-group">
-					<label for="pwd">Reimbursement Salary</label>
+					<label for="pwd">Reimbursement</label>
 					<input type="text" value="{{salaryDetails.salary_reimbursement}}" name="salary_reimbursement" id="salary_reimbursement" class="form-control" placeholder="Reimbursement Salary">
 				</div>
 				<div class="col-xs-6 form-group">
-					<label for="pwd">CA Salary</label>
-					<input type="text" value="{{salaryDetails.salary_ca}}" name="salary_ca" id="salary_ca" class="form-control" placeholder="CA Salary">
+					<label for="pwd">Conveyance Allowance</label>
+					<input type="text" value="{{salaryDetails.salary_ca}}" name="salary_ca" id="salary_ca" class="form-control" placeholder="Conveyance Allowance Salary">
 				</div>
 				<div class="col-xs-6 form-group">
 					<label for="pwd">Others Salary</label>
 					<input type="text" value="{{salaryDetails.salary_others}}" name="salary_others" id="salary_others" class="form-control" placeholder="Others Salary">
 				</div>
 				<div class="col-xs-6 form-group">
-					<label for="pwd">DPF Salary</label>
-					<input type="text" value="{{salaryDetails.salary_dpf}}" name="salary_dpf" id="salary_dpf" class="form-control" placeholder="DPF Salary">
+					<label for="pwd">Year Salary</label>
+					<input type="text" value="{{salaryDetails.salary_year}}" name="salary_year" id="salary_year" class="form-control" placeholder="Year Salary">
+				</div>
+				<div class="clearfix"></div>
+				<div style="font-size:18px; color: #000000; margin:20px 10px 30px 10px; border-bottom:1px solid #CCC">Salary Deduction</div>
+				<div class="col-xs-6 form-group">
+					<label for="pwd">Provident Fund Deduction</label>
+					<input type="text" value="{{salaryDetails.salary_dpf}}" name="salary_dpf" id="salary_dpf" class="form-control" placeholder="Provident Fund Deduction Salary">
 				</div>
 				<div class="col-xs-6 form-group">
-					<label for="pwd">DTAX Salary</label>
-					<input type="text" value="{{salaryDetails.salary_dtax}}" name="salary_dtax" id="salary_dtax" class="form-control" placeholder="DTAX Salary">
+					<label for="pwd">Total Tax Deduction</label>
+					<input type="text" value="{{salaryDetails.salary_dtax}}" name="salary_dtax" id="salary_dtax" class="form-control" placeholder="Total Tax Deduction Salary">
 				</div>
+				<div class="clearfix"></div>
+				<div style="font-size:18px; color: #000000; margin:20px 10px 30px 10px; border-bottom:1px solid #CCC">Total Pay and Deductions</div>
 				<div class="col-xs-6 form-group">
-					<label for="pwd">Deduction Salary</label>
+					<label for="pwd">Total Deduction</label>
 					<input type="text" value="{{salaryDetails.salary_dedc}}" name="salary_dedc" id="salary_dedc" class="form-control" placeholder="Deduction Salary">
 				</div>
 				<div class="col-xs-6 form-group">
 					<label for="pwd">Total Salary</label>
 					<input type="text" value="{{salaryDetails.salary_total}}" name="salary_total" id="salary_total" class="form-control" placeholder="Total Salary">
-				</div>
-				<div class="col-xs-6 form-group">
-					<label for="pwd">Year Salary</label>
-					<input type="text" value="{{salaryDetails.salary_year}}" name="salary_year" id="salary_year" class="form-control" placeholder="Year Salary">
-				</div>
-				
+				</div>				
 				<button class="btn btn-lg btn-login btn-block" type="submit">Submit</button>
 			</div>
 			<input type="hidden" name="act" value="save_salary">

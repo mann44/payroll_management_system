@@ -10,7 +10,7 @@
 	<link rel="shortcut icon" href="/assets/img/favicon.png">
 
 	<title>
-		Employee Management System
+		Payroll Management System
 	</title>
 
 	<!-- Bootstrap core CSS -->
@@ -77,42 +77,51 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-				<a class="navbar-brand" href="/">E<span>mployee</span> M<span>anagement</span> <span>System</span></a>
+				<a class="navbar-brand" href="/">Dew Software Payroll</a>
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 					<li><a href="/">Home</a></li>
 					<li><a href="/pages/about">About</a></li>
-					<li><a href="/pages/contact">Contact</a></li>				
+					{% if request.session.user_level_id == 1 %}				
 					<li class="dropdown">
-						<a class="dropdown-toggle" data-close-others="false" data-delay="0" data-hover="dropdown" data-toggle="dropdown" href="#">Employee <i class="fa fa-angle-down"></i>
+						<a class="dropdown-toggle" data-close-others="false" data-delay="0" data-hover="dropdown" data-toggle="dropdown" href="#">Administration <i class="fa fa-angle-down"></i>
                       </a>
 						<ul class="dropdown-menu">
-							<li><a href="/employee/employee-add">Add Employee</a></li>
 							<li><a href="/department/add">Add Department</a></li>
-							<li><a href="/project/add">Add Project</a></li>
-							<li><a href="/timesheet/add">Add TimeSheet</a></li>
-							<li><a href="/appraisal/add">Add Appraisal</a></li>
-							<li><a href="/leave/add">Add Leave</a></li>
+							<li><a href="/designation/add">Add Designation</a></li>
 							<li><a href="/salary/add">Add Salary</a></li>
+							<li><a href="/users/add">Add New Employee</a></li>
 						</ul>
 					</li>
 					<li class="dropdown">
-						<a class="dropdown-toggle" data-close-others="false" data-delay="0" data-hover="dropdown" data-toggle="dropdown" href="#">Employee Details <i class="fa fa-angle-down"></i>
+						<a class="dropdown-toggle" data-close-others="false" data-delay="0" data-hover="dropdown" data-toggle="dropdown" href="#">Reports <i class="fa fa-angle-down"></i>
                       </a>
 						<ul class="dropdown-menu">
-							<li><a href="/employee/employee-record">Employee Details</a></li>
-							<li><a href="/department">Department Details</a></li>
-							<li><a href="/project">Project Details</a></li>
-							<li><a href="/timesheet">Time Sheet Details</a></li>
-							<li><a href="/appraisal">Appraisal Details</a></li>
-							<li><a href="/leave">Leave Details</a></li>
-							<li><a href="/salary">Salary Details</a></li>
+							<li><a href="/users/report/1">System Admin Report</a></li>
+							<li><a href="/users/report/3">Employee Report</a></li>
+							<li><a href="/department">Department Report</a></li>
+							<li><a href="/designation">Designation Report</a></li>
+							<li><a href="/salary">Salary Report</a></li>
 						</ul>
 					</li>
-					
-					<li><a href="/employee">Login</a></li>
-				
+					{% endif %}
+					{% if request.session.authenticated %}		
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-close-others="false" data-delay="0" data-hover="dropdown" data-toggle="dropdown" href="#">My Account <i class="fa fa-angle-down"></i>
+                      </a>
+						<ul class="dropdown-menu">
+							<li><a href="/users/update/{{ request.session.user_id }}/">My Account</a></li>
+							<li><a href="/salary">My Salary Report</a></li>
+							<li><a href="/users/changepassword">Change Password</a></li>
+						</ul>
+					</li>
+					<li><a href="/users/logout">Logout</a></li>
+					{% else %}
+					<li><a href="/users">Employee Login</a></li>
+					<li><a href="/users">Admin Login</a></li>
+					<li><a href="/pages/contact">Contact Us</a></li>
+					{% endif %}
 				</ul>
 				</ul>
 			</div>
@@ -165,15 +174,15 @@
 						<ul class="page-footer-list">
 							<li>
 								<i class="fa fa-angle-right"></i>
-								<a href="#">Patient Module</a>
+								<a href="#">Admin Module</a>
 							</li>
 							<li>
 								<i class="fa fa-angle-right"></i>
-								<a href="#">User Module</a>
+								<a href="#">HR Module</a>
 							</li>
 							<li>
 								<i class="fa fa-angle-right"></i>
-								<a href="#">Doctor Module</a>
+								<a href="#">Employee Module</a>
 							</li>
 							<li>
 								<i class="fa fa-angle-right"></i>
@@ -181,7 +190,7 @@
 							</li>
 							<li>
 								<i class="fa fa-angle-right"></i>
-								<a href="#">Appointment Module</a>
+								<a href="#">Report Module</a>
 							</li>
 						</ul>
 					</div>
@@ -219,10 +228,9 @@
 							About Project
 						</h1>
 						<p>
-							A health club (also known as a fitness club, fitness center, health spa, and commonly referred to as a gym) is a place which
-							houses exercise equipment for the purpose of physical exercise. A health club (also known as a fitness club, fitness
-							center, health spa, and commonly referred to as a gym) is a place which houses exercise equipment for the purpose
-							of physical exercise.
+							Employee Management System is a function in organizations designed to maximize employee performance of an employer's strategic
+							objectives. HR is primarily concerned with the management of people within organizations, focusing on policies and
+							systems.
 						</p>
 					</div>
 				</div>
@@ -234,21 +242,9 @@
 	<footer class="footer-small">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-6 col-sm-6 pull-right">
-					<ul class="social-link-footer list-unstyled">
-						<li class="wow flipInX" data-wow-duration="2s" data-wow-delay=".1s"><a href="#"><i class="fa fa-facebook"></i></a></li>
-						<li class="wow flipInX" data-wow-duration="2s" data-wow-delay=".2s"><a href="#"><i class="fa fa-google-plus"></i></a></li>
-						<li class="wow flipInX" data-wow-duration="2s" data-wow-delay=".3s"><a href="#"><i class="fa fa-dribbble"></i></a></li>
-						<li class="wow flipInX" data-wow-duration="2s" data-wow-delay=".4s"><a href="#"><i class="fa fa-linkedin"></i></a></li>
-						<li class="wow flipInX" data-wow-duration="2s" data-wow-delay=".5s"><a href="#"><i class="fa fa-twitter"></i></a></li>
-						<li class="wow flipInX" data-wow-duration="2s" data-wow-delay=".6s"><a href="#"><i class="fa fa-skype"></i></a></li>
-						<li class="wow flipInX" data-wow-duration="2s" data-wow-delay=".7s"><a href="#"><i class="fa fa-github"></i></a></li>
-						<li class="wow flipInX" data-wow-duration="2s" data-wow-delay=".8s"><a href="#"><i class="fa fa-youtube"></i></a></li>
-					</ul>
-				</div>
 				<div class="col-md-4">
 					<div class="copyright">
-						<p>&copy; Copyright Employee Management System.</p>
+						<p>&copy; Manthan Gajjar.</p>
 					</div>
 				</div>
 			</div>

@@ -1,73 +1,83 @@
-{% extends 'base.html' %}
-{% block content %}
-     <!--breadcrumbs start-->
-    <div class="breadcrumbs">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-4 col-sm-4">
-            <h1>
-              About
-            </h1>
-          </div>
-        </div>
+{% extends 'base.html' %} {% block content %}
+<!--breadcrumbs start-->
+<div class="breadcrumbs">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 col-sm-4">
+        <h1>
+          About
+        </h1>
       </div>
     </div>
-    <!--breadcrumbs end-->
+  </div>
+</div>
+<!--breadcrumbs end-->
 
-    <!--container start-->
-    <div class="container">
-      <div class="row mar-b-50">
-        <div class="col-lg-5">
-          <div class="about-carousel wow fadeInLeft">
-            <div id="myCarousel" class="carousel slide">
-              <!-- Carousel items -->
-              <div class="carousel-inner">
-                <div class="active item">
-                  <img src="/assets/img/parallax-slider/images/1.jpg" alt="">
-                  <div class="carousel-caption">
-                    <p>
-                      Donec luctus ullamcorper nulla
-                    </p>
-                  </div>
-                </div>
-                <div class="item">
-                  <img src="/assets/img/parallax-slider/images/2.jpeg" alt="">
-                  <div class="carousel-caption">
-                    <p>
-                      Blanditiis praesentium voluptatum
-                    </p>
-                  </div>
-                </div>
-                <div class="item">
-                  <img src="/assets/img/parallax-slider/images/3.jpg" alt="">
-                  <div class="carousel-caption">
-                    <p>
-                      Blanditiis praesentium voluptatum
-                    </p>
-                  </div>
-                </div>
-
+<!--container start-->
+<div class="container">
+  <div class="row mar-b-50">
+    <div class="col-lg-5">
+      <div class="about-carousel wow fadeInLeft">
+        <div id="myCarousel" class="carousel slide">
+          <!-- Carousel items -->
+          <div class="carousel-inner">
+            <div class="active item">
+              <img src="/assets/img/parallax-slider/images/1.png" alt="">
+              <div class="carousel-caption">
+                <p>
+                  Donec luctus ullamcorper nulla
+                </p>
               </div>
-              <!-- Carousel nav -->
-              <a class="carousel-control left" href="#myCarousel" data-slide="prev">
+            </div>
+            <div class="item">
+              <img src="/assets/img/parallax-slider/images/2.png" alt="">
+              <div class="carousel-caption">
+                <p>
+                  Blanditiis praesentium voluptatum
+                </p>
+              </div>
+            </div>
+            <div class="item">
+              <img src="/assets/img/parallax-slider/images/3.png" alt="">
+              <div class="carousel-caption">
+                <p>
+                  Blanditiis praesentium voluptatum
+                </p>
+              </div>
+            </div>
+
+          </div>
+          <!-- Carousel nav -->
+          <a class="carousel-control left" href="#myCarousel" data-slide="prev">
                 <i class="fa fa-angle-left">
                 </i>
               </a>
-              <a class="carousel-control right" href="#myCarousel" data-slide="next">
+          <a class="carousel-control right" href="#myCarousel" data-slide="next">
                 <i class="fa fa-angle-right">
                 </i>
               </a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-7 about wow fadeInRight">
-          <h3>About Employee Management System</h3>
-          <p>Web-based systems are usually provided by a third-party service provider that offers appointment scheduling tools and features as a hosted software solution, usually provided via a web browser. One common benefit is that customers are provided the option of booking their own appointments. This facilitates appointment scheduling over the web as customers can access their usual professionals' schedules at their convenience and make appointments online through the Internet.</p>
-		  <p>Most health clubs have a main workout area, which primarily consists of free weights including dumbbells, barbells and exercise machines. This area often includes mirrors so that exercisers can monitor and maintain correct posture during their workout. A gym that predominantly or exclusively consists of free weights (dumbbells and barbells), as opposed to exercise machines, is sometimes referred to as a black-iron gym, after the traditional color of weight plates</p>
-		  <p>A cardio theater or cardio area includes many types of cardiovascular training-related equipment such as rowing machines, stationary exercise bikes, elliptical trainers and treadmills. These areas often include a number of audio-visual displays (either integrated into the equipment, or placed on walls around the area itself) in order to keep exercisers entertained during long cardio workout sessions.</p>
         </div>
       </div>
-
     </div>
-  {% endblock content %}
+    <div class="col-lg-7 about wow fadeInRight">
+      <h3>About Payroll Management System</h3>
+      <p>
+        Payroll Management System is a function in organizations designed to maximize employee performance of an employer's strategic
+        objectives. HR is primarily concerned with the management of people within organizations, focusing on policies and
+        systems. HR departments and units in organizations typically undertake a number of activities, including employee
+        recruitment, training and development, performance appraisal, and rewarding (e.g., managing pay and benefit systems).
+        HR is also concerned with industrial relations, that is, the balancing of organizational practices with requirements
+        arising from collective bargaining and from governmental laws.
+      </p>
+      <p>
+        HR is a product of the human relations movement of the early 20th century, when researchers began documenting ways of creating
+        business value through the strategic management of the workforce. The function was initially dominated by transactional
+        work, such as payroll and benefits administration, but due to globalization, company consolidation, technological
+        advances, and further research, HR as of 2015 focuses on strategic initiatives like mergers and acquisitions, talent
+        management, succession planning, industrial and labor relations, and diversity and inclusion.
+      </p>
+    </div>
+  </div>
 
+</div>
+{% endblock content %}

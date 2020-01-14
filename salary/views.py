@@ -11,8 +11,10 @@ from django.db import connection
 
 def listing(request):
     cursor = connection.cursor()
-    cursor.execute(
-        "SELECT * FROM salary, employee_employee WHERE employee_id = salary_employee_id")
+    if(request.session.get('user_level_id', None) != 1):
+        cursor.execute("SELECT * FROM month, salary, users_user WHERE month_id = salary_month AND user_id = salary_user_id AND salary_user_id ="+str(request.session.get('user_id'))+"  ORDER BY month_id")
+    else:
+        cursor.execute("SELECT * FROM month, salary, users_user WHERE month_id = salary_month AND user_id = salary_user_id ORDER BY month_id")
     salarylist = dictfetchall(cursor)
 
     context = {
@@ -45,10 +47,23 @@ def getData(id):
     dataList = dictfetchall(cursor)
     return dataList[0];
 
+
+def slip(request, id):
+    cursor = connection.cursor()
+    cursor.execute("SELECT * FROM month, designation, department, salary, users_user WHERE user_department = department_id AND user_designation = designation_id AND month_id = salary_month AND user_id = salary_user_id AND salary_id ="+str(id)+"  ORDER BY month_id")
+    dataList = dictfetchall(cursor)
+    context = {
+        "fn": "update",
+        "employeetypelist": getDropDown('users_user', 'user_id'),
+        "salaryDetails": dataList[0],
+        "heading": 'Employee Salary Update',
+    };
+    return render(request, 'salary-slip.html', context)
+
 def update(request, salaryId):
     context = {
         "fn": "update",
-        "employeetypelist": getDropDown('employee_employee', 'employee_id'),
+        "employeetypelist": getDropDown('users_user', 'user_id'),
         "salaryDetails": getData(salaryId),
         "heading": 'Employee Salary Update',
     }
@@ -56,11 +71,11 @@ def update(request, salaryId):
         cursor = connection.cursor()
         cursor.execute("""
                    UPDATE salary
-                   SET salary_employee_id=%s, salary_month=%s, salary_working_days=%s, salary_basic=%s, salary_hra=%s, salary_mediclaim=%s, salary_ta=%s,
+                   SET salary_user_id=%s, salary_month=%s, salary_working_days=%s, salary_basic=%s, salary_hra=%s, salary_mediclaim=%s, salary_ta=%s,
 		   salary_da=%s, salary_reimbursement=%s, salary_ca=%s, salary_others=%s, salary_dpf=%s, salary_dtax=%s, salary_dedc=%s, salary_total=%s, salary_year=%s
 		   WHERE salary_id = %s
                 """, (
-            request.POST['salary_employee_id'],
+            request.POST['salary_user_id'],
             request.POST['salary_month'],
             request.POST['salary_working_days'],
             request.POST['salary_basic'],
@@ -90,17 +105,17 @@ def update(request, salaryId):
 def add(request):
     context = {
         "fn": "add",
-        "employeetypelist": getDropDown('employee_employee', 'employee_id'),
-        "heading": 'Time Sheet Details'
+        "employeetypelist": getDropDown('users_user', 'user_id'),
+        "heading": 'Salary Details'
     };
     if (request.method == "POST"):
         cursor = connection.cursor()
         cursor.execute("""
 		   INSERT INTO salary
-		   SET salary_employee_id=%s, salary_month=%s, salary_working_days=%s, salary_basic=%s, salary_hra=%s, salary_mediclaim=%s, salary_ta=%s,
+		   SET salary_user_id=%s, salary_month=%s, salary_working_days=%s, salary_basic=%s, salary_hra=%s, salary_mediclaim=%s, salary_ta=%s,
 		   salary_da=%s, salary_reimbursement=%s, salary_ca=%s, salary_others=%s, salary_dpf=%s, salary_dtax=%s, salary_dedc=%s, salary_total=%s, salary_year=%s		   
 		""", (
-            request.POST['salary_employee_id'],
+            request.POST['salary_user_id'],
             request.POST['salary_month'],
             request.POST['salary_working_days'],
             request.POST['salary_basic'],

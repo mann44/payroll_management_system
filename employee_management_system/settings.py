@@ -31,12 +31,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'employee.apps.EmployeeConfig',
+    'users.apps.UsersConfig',
     'department.apps.DepartmentConfig',
-    'project.apps.ProjectConfig',
-    'timesheet.apps.TimesheetConfig',
-    'leave.apps.LeaveConfig',
-    'appraisal.apps.AppraisalConfig',
+    'designation.apps.DesignationConfig',
     'salary.apps.SalaryConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -84,8 +81,8 @@ WSGI_APPLICATION = 'employee_management_system.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'mysql.connector.django',
-        'NAME': 'employee_management_system',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'payorll_management_system',
         'USER':'root',
         'PASSWORD':'',
         'HOST':'',
@@ -135,3 +132,7 @@ STATIC_URL = '/assets/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'assets')
 ]
+
+
+MEDIA_URL = '/uploads/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
